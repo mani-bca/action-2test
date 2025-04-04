@@ -28,8 +28,7 @@ jobs:
 
       - name: Build on Ubuntu
         run: |
-          echo "Running build on Ubuntu..."
-          python test_main.py build  # Replace with your build command if different
+          python -m unittest test_todo.py -v
 
   windows_job:
     if: github.event.pull_request.merged == true
@@ -51,5 +50,4 @@ jobs:
 
       - name: Build on Windows
         run: |
-          echo "Running build on Windows..."
-          python test_main.py build
+          python -m unittest test_todo.py -v
