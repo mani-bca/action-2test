@@ -29,7 +29,7 @@ jobs:
       - name: Build on Ubuntu
         run: |
           echo "Running build on Ubuntu..."
-          python setup.py build  # Replace with your build command if different
+          python test_main.py build  # Replace with your build command if different
 
   windows_job:
     if: github.event.pull_request.merged == true
@@ -52,4 +52,4 @@ jobs:
       - name: Build on Windows
         run: |
           echo "Running build on Windows..."
-          python setup.py build
+          python test_main.py build
