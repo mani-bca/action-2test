@@ -1,0 +1,22 @@
+name: dev environment workflow
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.py'
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+jobs:
+  build:
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.changed_files, '.py')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
