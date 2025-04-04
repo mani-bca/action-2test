@@ -10,7 +10,7 @@ class Todo:
         return False
 
     def remove_task(self, index):
-        """Remove a task from the todo lists."""
+        """Remove a task from the todo list."""
         if 0 <= index < len(self.tasks):
             self.tasks.pop(index)
             return True
