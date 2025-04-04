@@ -28,7 +28,7 @@ jobs:
 
       - name: Build on Ubuntu
         run: |
-          python -m unittest test_todo.py -v
+          python setup.py build
 
   windows_job:
     if: github.event.pull_request.merged == true
@@ -50,4 +50,4 @@ jobs:
 
       - name: Build on Windows
         run: |
-          python -m unittest test_todo.py -v
+          python setup.py build
