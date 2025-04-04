@@ -6,6 +6,9 @@ on:
       - main
     types:
       - closed
+    path:
+      - '**.py'
+      - '**.txt'
 
 jobs:
   ubuntu_job:
