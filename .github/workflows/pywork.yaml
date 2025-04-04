@@ -11,9 +11,12 @@ on:
       - '**.txt'
 
 jobs:
-  ubuntu_job:
+  build:
     if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
 
     steps:
       - name: Checkout code
@@ -29,38 +32,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Build on Ubuntu
-        run: |
-          python setup.py build
-
-  windows_job:
-    if: github.event.pull_request.merged == true
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Build on Windows
+      - name: Build
         run: |
           python setup.py build
 
   output:
     runs-on: ubuntu-latest
-    needs: [ubuntu_job, windows_job]
+    needs: [build]
     steps:
       - name: Result
         run: |
-           echo "Triggered by: ${{ github.actor}}"
-           echo "build_on_linux Job status: ${{ needs.ubuntu_job.result }}"
-           echo "build_on_windows Job status: ${{ needs.windows_job.result }}"
+           echo "Triggered by: ${{ github.actor }}"
+           echo "build on ubuntu-latest Job status: ${{ needs.build.outputs['ubuntu-latest'].result }}"
+           echo "build on windows-latest Job status: ${{ needs.build.outputs['windows-latest'].result }}"
