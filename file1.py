@@ -2,4 +2,5 @@ Diffs provide useful information about your repository in a legible format, maki
 
 Review changes while staging. 
 Decide whether to rebase or merge. 
+added second new line
 Copy and paste code from a file. 
